@@ -25,21 +25,13 @@ app.get('/', (req, res) => {
 // Test database connection
 app.get('/test-db', async (req, res) => {
   try {
-    const connection = await mysql.createConnection({
-      host: process.env.DB_HOST,
-      port: process.env.DB_PORT,
-      user: process.env.DB_USER,
-      password: process.env.DB_PASSWORD,
-      database: process.env.DB_NAME
-    });
-    
-    const [rows] = await connection.execute('SELECT 1 as test');
-    await connection.end();
+    const result = await pool.query('SELECT NOW()');
     
     res.json({
       status: 'success',
       database: 'connected',
-      tables: ['users', 'loans', 'payments'] // List your main tables here
+      postgres: 'working',
+      current_time: result.rows[0].now
     });
   } catch (error) {
     console.error('Database connection failed:', error);

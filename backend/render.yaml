@@ -24,7 +24,7 @@ services:
           name: loanapp-mysql
           property: password
       - key: DB_NAME
-        value: loanappDB
+        value: loanappdb
       - key: JWT_SECRET
         generateValue: true
 
@@ -36,7 +36,7 @@ services:
       - key: MYSQL_ROOT_PASSWORD
         generateValue: true
       - key: MYSQL_DATABASE
-        value: loanappDB
+        value: loanappdb
       - key: MYSQL_USER
         value: admin
       - key: MYSQL_PASSWORD

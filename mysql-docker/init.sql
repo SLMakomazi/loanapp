@@ -1,0 +1,3 @@
+﻿-- Create additional users or permissions if needed
+GRANT ALL PRIVILEGES ON ${MYSQL_DATABASE}.* TO '${MYSQL_USER}'@'%';
+FLUSH PRIVILEGES;

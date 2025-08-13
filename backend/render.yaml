@@ -1,0 +1,43 @@
+services:
+  - type: web
+    name: loanapp-backend
+    env: node
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: DB_HOST
+        fromService:
+          name: loanapp-mysql
+          property: hostname
+      - key: DB_PORT
+        fromService:
+          name: loanapp-mysql
+          property: port
+      - key: DB_USER
+        value: admin
+      - key: DB_PASSWORD
+        fromService:
+          name: loanapp-mysql
+          property: password
+      - key: DB_NAME
+        value: loanappDB
+      - key: JWT_SECRET
+        generateValue: true
+
+  - type: private-service
+    name: loanapp-mysql
+    env: docker
+    dockerfilePath: ./mysql-docker/Dockerfile
+    envVars:
+      - key: MYSQL_ROOT_PASSWORD
+        generateValue: true
+      - key: MYSQL_DATABASE
+        value: loanappDB
+      - key: MYSQL_USER
+        value: admin
+      - key: MYSQL_PASSWORD
+        generateValue: true

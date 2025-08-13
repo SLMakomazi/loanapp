@@ -1,8 +1,8 @@
 require('dotenv').config();
 const express = require('express');
-const mysql = require('mysql2/promise');
+const pool = require('./config/database');
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 10000;
 
 // Error handling for uncaught exceptions
 process.on('uncaughtException', (error) => {
@@ -15,9 +15,9 @@ app.use(express.json());
 
 // Basic route
 app.get('/', (req, res) => {
-  res.json({ 
+  res.json({
     message: 'Loan App Backend is running!',
-    database: process.env.DB_NAME,
+    database: 'loanapp_db',
     status: 'online'
   });
 });

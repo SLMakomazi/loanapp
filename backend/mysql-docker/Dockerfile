@@ -1,7 +1,17 @@
 ﻿FROM mysql:8
-ENV MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-ENV MYSQL_DATABASE=${MYSQL_DATABASE}
-ENV MYSQL_USER=${MYSQL_USER}
-ENV MYSQL_PASSWORD=${MYSQL_PASSWORD}
-VOLUME /var/lib/mysql
+
+# Set root password
+ENV MYSQL_ROOT_PASSWORD=admin
+
+# Create database
+ENV MYSQL_DATABASE=loanappDB
+
+# Create user and grant privileges
+ENV MYSQL_USER=admin
+ENV MYSQL_PASSWORD=admin
+
+# Copy initialization script
+COPY init.sql /docker-entrypoint-initdb.d/
+
+# Expose MySQL port
 EXPOSE 3306
